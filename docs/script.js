@@ -24,24 +24,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("contactForm");
 
   form.addEventListener("submit", async function (e) {
+    e.preventDefault(); 
+
     const honeypotValue = document.getElementById("website").value;
     if (honeypotValue) {
-      e.preventDefault();
       console.warn("Bot detected via honeypot field.");
       return;
     }
 
     const timeTaken = Date.now() - formLoadTime;
     if (timeTaken < 3000) {
-      e.preventDefault();
       alert("Submission too fast. Please take a moment to fill in the form.");
       return;
     }
 
-    e.preventDefault();
+    const widget = document.querySelector(".cf-turnstile");
+    turnstile.reset(widget);
 
     turnstile
-      .execute(document.querySelector(".cf-turnstile"))
+      .execute(widget)
       .then(async function (token) {
         const formData = new FormData(form);
         formData.append("turnstileToken", token);
@@ -94,6 +95,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "There was an error processing your inquiry. Please try again later."
           );
         }
+      })
+      .catch(function (error) {
+        console.error("Turnstile execute error:", error);
       });
   });
 
