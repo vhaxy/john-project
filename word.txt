@@ -1,0 +1,153 @@
+combine this animation message that will come up after the user inputs their details in the inquiry box. combine this with my already existing code. dont change anything else and always provide me the full code for the html, css and js in their own files and without comments 
+
+this is the code i want you to add in 
+
+<div id="thankYouMessage" style="display: none;">
+
+  <div class="success-content">
+
+    <h2>Thank You!</h2>
+
+    <p>I've received your inquiry and will get back to you soon.</p>
+
+    
+
+    <div class="next-steps">
+
+      <h3>What's Next?</h3>
+
+      <ul>
+
+        <li>Check your email for a confirmation</li>
+
+        <li>Download our free revision guide while you wait</li>
+
+        <li>Browse our testimonials to see what other parents say</li>
+
+      </ul>
+
+    </div>
+
+    
+
+    <div class="button-group-2">
+
+      <a href="download/revision-guide.pdf" download class="download-btn">
+
+        DOWNLOAD GUIDE
+
+      </a>
+
+      <a href="#testimonials" class="download-btn">
+
+        VIEW TESTIMONIALS
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+#thankYouMessage {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+#thankYouMessage.visible {
+  opacity: 1;
+}
+
+.success-content {
+  text-align: center;
+}
+
+.success-content h2 {
+  color: #00c5d2;
+  margin-bottom: 1rem;
+}
+
+.next-steps {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.next-steps h3 {
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.next-steps ul {
+  list-style: none;
+  padding: 0;
+}
+
+.next-steps li {
+  padding: 0.5rem 0;
+  color: #475569;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.next-steps li::before {
+  content: "✓";
+  color: #00c5d2;
+  position: absolute;
+  left: 0;
+}
+
+const form = document.getElementById("contactForm");
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  try {
+    const formData = new FormData(this);
+    const firstName = formData.get("firstName");
+    const lastName = formData.get("lastName");
+    const userEmail = formData.get("email");
+    const phone = formData.get("phone").toString();
+    const fullName = `${firstName} ${lastName}`;
+
+    await emailjs.send("service_bpoo366", "template_k7g1gcm", {
+      name: fullName,
+      user_email: userEmail,
+      phone: phone,
+    });
+
+    const params = new URLSearchParams();
+    params.append("firstName", firstName);
+    params.append("lastName", lastName);
+    params.append("email", userEmail);
+    params.append("phone", phone);
+
+    const response = await fetch(scriptURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params.toString(),
+    });
+
+    // Hide the form and show thank you message
+    const formElement = form;
+    const thankYouElement = document.getElementById('thankYouMessage');
+    
+    formElement.style.opacity = '0';
+    formElement.style.transform = 'translateY(-20px)';
+    
+    setTimeout(() => {
+      formElement.style.display = 'none';
+      thankYouElement.style.display = 'block';
+      // Force browser reflow
+      void thankYouElement.offsetWidth;
+      thankYouElement.classList.add('visible');
+    }, 300);
+
+    form.reset();
+    
+  } catch (error) {
+    console.error("Form submission error:", error);
+    alert("There was an error processing your inquiry. Please try again later.");
+  }
+});

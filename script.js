@@ -1,27 +1,24 @@
-const scriptURL = "https://script.google.com/macros/s/AKfycbzGa5wK8qZMgEUC06G0s4smN0cSeZtis6y5WN2gaq5E9XFlbMwcPdPEEbNi_dt_K4iyZA/exec";
+const scriptURL =
+  "https://script.google.com/macros/s/AKfycbzGa5wK8qZMgEUC06G0s4smN0cSeZtis6y5WN2gaq5E9XFlbMwcPdPEEbNi_dt_K4iyZA/exec";
 
 document.addEventListener("DOMContentLoaded", function () {
   const fadeEls = document.querySelectorAll(".fade");
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        // Add 'in-view' class when element enters viewport
         if (entry.isIntersecting) {
           entry.target.classList.add("in-view");
         } else {
-          // Remove 'in-view' class when element leaves viewport
           entry.target.classList.remove("in-view");
         }
       });
     },
-    { 
+    {
       threshold: 0.1,
-      // Add rootMargin to trigger slightly before elements enter viewport
-      rootMargin: '50px'
+      rootMargin: "50px",
     }
   );
-  
-  // Observe all fade elements
+
   fadeEls.forEach((el) => observer.observe(el));
 
   const form = document.getElementById("contactForm");
@@ -48,13 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
       params.append("email", userEmail);
       params.append("phone", phone);
 
-      console.log("Sending form data:", {
-        firstName,
-        lastName,
-        email: userEmail,
-        phone,
-      });
-
       const response = await fetch(scriptURL, {
         method: "POST",
         headers: {
@@ -63,27 +53,37 @@ document.addEventListener("DOMContentLoaded", function () {
         body: params.toString(),
       });
 
-      const responseText = await response.text();
-      console.log("Google Sheets Response:", responseText);
+      const formElement = form;
+      const thankYouElement = document.getElementById("thankYouMessage");
 
-      alert("Thank you for your inquiry! A confirmation email has been sent.");
+      formElement.style.opacity = "0";
+      formElement.style.transform = "translateY(-20px)";
+
+      setTimeout(() => {
+        formElement.style.display = "none";
+        thankYouElement.style.display = "block";
+        void thankYouElement.offsetWidth;
+        thankYouElement.classList.add("visible");
+      }, 300);
+
       form.reset();
-      
     } catch (error) {
       console.error("Form submission error:", error);
-      alert("There was an error processing your inquiry. Please try again later.");
+      alert(
+        "There was an error processing your inquiry. Please try again later."
+      );
     }
   });
 
   const phoneInput = form.querySelector('input[name="phone"]');
-  phoneInput.addEventListener('input', function(e) {
-    let value = e.target.value.replace(/\D/g, '');
-    
+  phoneInput.addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, "");
+
     if (value.length >= 10) {
-      value = value.slice(0, 10); 
+      value = value.slice(0, 10);
       value = value.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
     }
-    
+
     e.target.value = value;
   });
 });

@@ -1,6 +1,3 @@
-/* ---------- Base Styles ---------- */
-
-/* Import Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;700&display=swap");
 
 html,
@@ -12,23 +9,21 @@ body {
   padding: 0;
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera for both html and body */
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
 body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -60,10 +55,9 @@ body {
   padding: 2rem;
 }
 
-/* ---------- Navbar Styles ---------- */
 .navbar {
   display: flex;
-  justify-content: center; /* Center nav links */
+  justify-content: center;
   align-items: center;
   background: white;
   border-radius: 10px;
@@ -96,7 +90,6 @@ body {
   font-weight: 600;
 }
 
-/* ---------- Hero Section ---------- */
 .hero {
   display: flex;
   align-items: center;
@@ -131,17 +124,16 @@ h1 {
   color: #1e293b;
 }
 
-/* ---------- Content Sections ---------- */
 .content-wrapper {
   margin-bottom: 4rem;
 }
 
 .top-row {
   display: grid;
-  grid-template-columns: 2fr 3fr; /* Left is smaller, right is larger */
+  grid-template-columns: 2fr 3fr;
   gap: 2rem;
   margin-bottom: 2rem;
-  align-items: start; /* Ensures both boxes align at the top */
+  align-items: start;
 }
 
 .video-section,
@@ -158,11 +150,6 @@ h1 {
   margin-top: 1rem;
 }
 
-/* 
-  Updated the video caption:
-  - Slightly larger font size (1rem instead of 0.9rem)
-  - Italic text (font-style: italic)
-*/
 .video-caption {
   font-size: 1rem;
   font-style: italic;
@@ -207,17 +194,12 @@ h1 {
   color: #475569;
 }
 
-/* ---------- Testimonials Section ---------- */
-/* Remove the old #testimonials, #about { scroll-margin-top: 2rem; } rule */
-
-/* If you still want a small offset for testimonials only: */
 #testimonials {
   scroll-margin-top: 5.5rem;
 }
 
-/* For #about, set a custom scroll-margin-top */
 #about {
-  scroll-margin-top: 515px; /* Adjust this as needed to match your exact desired scroll position */
+  scroll-margin-top: 515px;
 }
 
 .testimonials,
@@ -278,7 +260,6 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* ---------- Promo Section ---------- */
 .promo-section {
   color: white;
   padding: 2rem;
@@ -291,7 +272,6 @@ h1 {
   font-size: 2rem;
 }
 
-/* ---------- Contact Section ---------- */
 .contact-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -331,7 +311,6 @@ h1 {
   margin-bottom: 0.8rem;
 }
 
-/* Button Groups */
 .button-group-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -364,7 +343,6 @@ h1 {
   transform: translateY(5px);
 }
 
-/* Inquiry Box */
 .inquiry-box .inquiry-title {
   font-size: 1.5rem;
   color: #475569;
@@ -387,6 +365,7 @@ h1 {
   flex-direction: column;
   gap: 1rem;
   flex-grow: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .name-fields {
@@ -453,7 +432,6 @@ textarea:focus {
   transform: translateY(5px);
 }
 
-/* ---------- Fade Effects ---------- */
 .fade {
   opacity: 0;
   transform: translateY(20px);
@@ -465,7 +443,53 @@ textarea:focus {
   transform: translateY(0);
 }
 
-/* ---------- Media Queries for Responsiveness ---------- */
+#thankYouMessage {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+#thankYouMessage.visible {
+  opacity: 1;
+}
+
+.success-content {
+  text-align: center;
+}
+
+.success-content h2 {
+  color: #00c5d2;
+  margin-bottom: 1rem;
+}
+
+.next-steps {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.next-steps h3 {
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.next-steps ul {
+  list-style: none;
+  padding: 0;
+}
+
+.next-steps li {
+  padding: 0.5rem 0;
+  color: #475569;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.next-steps li::before {
+  content: "✓";
+  color: #00c5d2;
+  position: absolute;
+  left: 0;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
