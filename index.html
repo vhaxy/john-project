@@ -15,23 +15,18 @@
   </head>
   <body>
     <div class="container">
-      <!-- Navbar -->
+      <!-- Navbar (Home removed & centered links) -->
       <nav class="navbar">
-        <div class="nav-left">
-          <a href="#home" class="nav-logo active">Home</a>
-        </div>
-        <div class="nav-right">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </nav>
 
       <!-- Hero Section -->
-      <section id="home" class="hero">
+      <section class="hero fade">
         <div class="hero-image">
           <img
             src="images/hero-image.avif"
@@ -51,14 +46,8 @@
       <!-- Video, Benefits, and About Section -->
       <div class="content-wrapper">
         <div class="top-row">
-          <div class="video-section">
-            <video controls>
-              <source src="videos/intro-video.MP4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <div class="benefits-section">
-            <h2>The benefits of group tutoring over 1:1</h2>
+          <div class="benefits-section fade">
+            <h2>The Benefits Of Group Tutoring Over 1:1</h2>
             <ul>
               <li>Everyone is in the same boat...</li>
               <li>No over-reliance on hand-holding...</li>
@@ -67,8 +56,18 @@
               <li>More cost effective...</li>
             </ul>
           </div>
+          <div class="video-section fade">
+            <video controls>
+              <source src="videos/intro-video.MP4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <p class="video-caption">
+              Watch this video to see what are the 5 key areas students struggle
+              with.
+            </p>
+          </div>
         </div>
-        <div id="about" class="about-section">
+        <div id="about" class="about-section fade">
           <h2>About Me</h2>
           <p>
             I'm John and I am in my eighth year of teaching and tutoring maths.
@@ -84,7 +83,7 @@
       </div>
 
       <!-- Testimonials Section -->
-      <section id="testimonials" class="testimonials">
+      <section id="testimonials" class="testimonials fade">
         <h2>What Our Parents Say</h2>
         <div class="testimonial-grid">
           <div class="testimonial-card">
@@ -92,7 +91,7 @@
               <img src="images/female-parent-placeholder.jpg" alt="Parent" />
             </div>
             <p>
-              "They support my children's learning with respect & patience.
+              "They support my children's learning with respect &amp; patience.
               They've even helped with maths homework from school, showing me
               how to support them at home too! Thank you."
             </p>
@@ -128,13 +127,13 @@
       </section>
 
       <!-- Promo Section -->
-      <section class="promo-section">
+      <section class="promo-section fade">
         <h2>Struggling with GCSE Math? Let's Fix It in 12 Weeks.</h2>
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="contact-section">
-        <div id="pricing" class="pricing-box">
+      <section id="contact" class="contact-section fade">
+        <div id="pricing" class="pricing-box fade">
           <div class="pricing-breakdown">
             <h3>Pricing Breakdown</h3>
             <ul>
@@ -142,18 +141,24 @@
                 <strong>What You Get:</strong> 2 tutoring sessions per week
               </li>
               <li><strong>Duration:</strong> 12 weeks (24 sessions)</li>
-              <li><strong>Cost:</strong> $50 per session</li>
-              <li><strong>Total:</strong> $1,200</li>
+              <li><strong>Cost:</strong> £20 per session</li>
+              <li><strong>Total:</strong> £480</li>
             </ul>
           </div>
           <div class="button-group-2">
-            <a href="#" class="download-btn">BOOK A LESSON</a>
-            <a href="download/revision-guide.pdf" download class="download-btn"
-              >DOWNLOAD A FREE GUIDE</a
+            <a
+              href="https://buy.stripe.com/test_00g3em3Ea0Rw4vudQQ"
+              class="download-btn"
+              target="_blank"
             >
+              BOOK A LESSON
+            </a>
+            <a href="download/revision-guide.pdf" download class="download-btn">
+              DOWNLOAD A FREE GUIDE
+            </a>
           </div>
         </div>
-        <div class="inquiry-box">
+        <div class="inquiry-box fade">
           <h2 class="inquiry-title">Contact Me For More Information</h2>
           <form id="contactForm" class="contact-form">
             <div class="name-fields">
@@ -177,9 +182,10 @@
               required
             />
             <input
-              type="text"
+              type="tel"
               name="phone"
               placeholder="Your Phone Number"
+              pattern="[0-9\+\-\s]+"
               required
             />
             <button type="submit" class="submit-btn">SEND YOUR INQUIRY</button>
@@ -187,6 +193,8 @@
         </div>
       </section>
     </div>
+
+    <!-- EmailJS Library -->
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
@@ -194,6 +202,8 @@
     <script>
       emailjs.init("R0Pu4Wojwu-6Z2RMd");
     </script>
+
+    <!-- Custom JavaScript -->
     <script src="script.js"></script>
   </body>
 </html>

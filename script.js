@@ -1,27 +1,79 @@
-document.getElementById("contactForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+const scriptURL = "https://script.google.com/macros/s/AKfycbzGa5wK8qZMgEUC06G0s4smN0cSeZtis6y5WN2gaq5E9XFlbMwcPdPEEbNi_dt_K4iyZA/exec";
 
-  const firstName = this.querySelector('input[name="firstName"]').value;
-  const lastName = this.querySelector('input[name="lastName"]').value;
-  const userEmail = this.querySelector('input[name="email"]').value;
-  const phone = this.querySelector('input[name="phone"]').value;
+document.addEventListener("DOMContentLoaded", function () {
+  const fadeEls = document.querySelectorAll(".fade");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+  fadeEls.forEach((el) => observer.observe(el));
 
-  const fullName = firstName + " " + lastName;
+  const form = document.getElementById("contactForm");
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  const templateParams = {
-    name: fullName, 
-    user_email: userEmail, 
-    phone: phone       
-  };
+    try {
+      const formData = new FormData(this);
+      const firstName = formData.get("firstName");
+      const lastName = formData.get("lastName");
+      const userEmail = formData.get("email");
+      const phone = formData.get("phone").toString();
+      const fullName = `${firstName} ${lastName}`;
 
-  emailjs.send("service_bpoo366", "template_k7g1gcm", templateParams)
-    .then((response) => {
-      console.log("SUCCESS!", response.status, response.text);
+      await emailjs.send("service_bpoo366", "template_k7g1gcm", {
+        name: fullName,
+        user_email: userEmail,
+        phone: phone,
+      });
+
+      const params = new URLSearchParams();
+      params.append("firstName", firstName);
+      params.append("lastName", lastName);
+      params.append("email", userEmail);
+      params.append("phone", phone);
+
+      console.log("Sending form data:", {
+        firstName,
+        lastName,
+        email: userEmail,
+        phone,
+      });
+
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: params.toString(),
+      });
+
+      const responseText = await response.text();
+      console.log("Google Sheets Response:", responseText);
+
       alert("Thank you for your inquiry! A confirmation email has been sent.");
-      this.reset(); 
-    })
-    .catch((error) => {
-      console.error("FAILED...", error);
+      form.reset();
+      
+    } catch (error) {
+      console.error("Form submission error:", error);
       alert("There was an error processing your inquiry. Please try again later.");
-    });
+    }
+  });
+
+  const phoneInput = form.querySelector('input[name="phone"]');
+  phoneInput.addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    
+    if (value.length >= 10) {
+      value = value.slice(0, 10); 
+      value = value.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+    }
+    
+    e.target.value = value;
+  });
 });
