@@ -18,72 +18,93 @@ document.addEventListener("DOMContentLoaded", function () {
       rootMargin: "50px",
     }
   );
-
   fadeEls.forEach((el) => observer.observe(el));
 
+  let formLoadTime = Date.now();
   const form = document.getElementById("contactForm");
+
   form.addEventListener("submit", async function (e) {
+    const honeypotValue = document.getElementById("website").value;
+    if (honeypotValue) {
+      e.preventDefault();
+      console.warn("Bot detected via honeypot field.");
+      return;
+    }
+
+    const timeTaken = Date.now() - formLoadTime;
+    if (timeTaken < 3000) {
+      e.preventDefault();
+      alert("Submission too fast. Please take a moment to fill in the form.");
+      return;
+    }
+
     e.preventDefault();
 
-    try {
-      const formData = new FormData(this);
-      const firstName = formData.get("firstName");
-      const lastName = formData.get("lastName");
-      const userEmail = formData.get("email");
-      const phone = formData.get("phone").toString();
-      const fullName = `${firstName} ${lastName}`;
+    turnstile
+      .execute(document.querySelector(".cf-turnstile"))
+      .then(async function (token) {
+        const formData = new FormData(form);
+        formData.append("turnstileToken", token);
 
-      await emailjs.send("service_bpoo366", "template_k7g1gcm", {
-        name: fullName,
-        user_email: userEmail,
-        phone: phone,
+        const firstName = formData.get("firstName");
+        const lastName = formData.get("lastName");
+        const userEmail = formData.get("email");
+        const phone = formData.get("phone").toString();
+        const fullName = `${firstName} ${lastName}`;
+
+        try {
+          await emailjs.send("service_bpoo366", "template_k7g1gcm", {
+            name: fullName,
+            user_email: userEmail,
+            phone: phone,
+          });
+
+          const params = new URLSearchParams();
+          params.append("firstName", firstName);
+          params.append("lastName", lastName);
+          params.append("email", userEmail);
+          params.append("phone", phone);
+          params.append("turnstileToken", token);
+
+          // Post the data to your Google Script endpoint
+          const response = await fetch(scriptURL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: params.toString(),
+          });
+
+          const formElement = form;
+          const thankYouElement = document.getElementById("thankYouMessage");
+
+          formElement.style.opacity = "0";
+          formElement.style.transform = "translateY(-20px)";
+
+          setTimeout(() => {
+            formElement.style.display = "none";
+            thankYouElement.style.display = "block";
+            void thankYouElement.offsetWidth;
+            thankYouElement.classList.add("visible");
+          }, 300);
+
+          form.reset();
+        } catch (error) {
+          console.error("Form submission error:", error);
+          alert(
+            "There was an error processing your inquiry. Please try again later."
+          );
+        }
       });
-
-      const params = new URLSearchParams();
-      params.append("firstName", firstName);
-      params.append("lastName", lastName);
-      params.append("email", userEmail);
-      params.append("phone", phone);
-
-      const response = await fetch(scriptURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: params.toString(),
-      });
-
-      const formElement = form;
-      const thankYouElement = document.getElementById("thankYouMessage");
-
-      formElement.style.opacity = "0";
-      formElement.style.transform = "translateY(-20px)";
-
-      setTimeout(() => {
-        formElement.style.display = "none";
-        thankYouElement.style.display = "block";
-        void thankYouElement.offsetWidth;
-        thankYouElement.classList.add("visible");
-      }, 300);
-
-      form.reset();
-    } catch (error) {
-      console.error("Form submission error:", error);
-      alert(
-        "There was an error processing your inquiry. Please try again later."
-      );
-    }
   });
 
   const phoneInput = form.querySelector('input[name="phone"]');
   phoneInput.addEventListener("input", function (e) {
     let value = e.target.value.replace(/\D/g, "");
-
     if (value.length >= 10) {
       value = value.slice(0, 10);
       value = value.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
     }
-
     e.target.value = value;
   });
 });

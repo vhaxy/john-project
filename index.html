@@ -10,6 +10,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+    ></script>
     <title>GCSE Math Tutoring - Simplified</title>
   </head>
   <body>
@@ -148,6 +153,22 @@
         <div class="inquiry-box fade">
           <h2 class="inquiry-title">Contact Me For More Information</h2>
           <form id="contactForm" class="contact-form">
+            <div
+              class="honeypot-wrapper"
+              style="position: absolute; left: -10000px"
+            >
+              <label for="website" class="honeypot-label"
+                >Leave this field empty</label
+              >
+              <input
+                type="text"
+                name="website"
+                id="website"
+                class="honeypot-field"
+                autocomplete="off"
+                tabindex="-1"
+              />
+            </div>
             <div class="name-fields">
               <input
                 type="text"
@@ -175,6 +196,11 @@
               pattern="[0-9\+\-\s]+"
               required
             />
+            <div
+              class="cf-turnstile"
+              data-sitekey="0x4AAAAAAA9T91nxwcSemJaM"
+              data-size="invisible"
+            ></div>
             <button type="submit" class="submit-btn">SEND YOUR INQUIRY</button>
           </form>
           <div id="thankYouMessage" style="display: none">

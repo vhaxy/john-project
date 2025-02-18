@@ -405,6 +405,11 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(0, 150, 199, 0.1);
 }
 
+.honeypot-wrapper {
+  position: absolute;
+  left: -10000px;
+}
+
 .submit-btn {
   width: 100%;
   text-align: center;
