@@ -5,13 +5,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
+        // Add 'in-view' class when element enters viewport
         if (entry.isIntersecting) {
           entry.target.classList.add("in-view");
+        } else {
+          // Remove 'in-view' class when element leaves viewport
+          entry.target.classList.remove("in-view");
         }
       });
     },
-    { threshold: 0.1 }
+    { 
+      threshold: 0.1,
+      // Add rootMargin to trigger slightly before elements enter viewport
+      rootMargin: '50px'
+    }
   );
+  
+  // Observe all fade elements
   fadeEls.forEach((el) => observer.observe(el));
 
   const form = document.getElementById("contactForm");

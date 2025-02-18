@@ -212,12 +212,12 @@ h1 {
 
 /* If you still want a small offset for testimonials only: */
 #testimonials {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 5.5rem;
 }
 
 /* For #about, set a custom scroll-margin-top */
 #about {
-  scroll-margin-top: 480px; /* Adjust this as needed to match your exact desired scroll position */
+  scroll-margin-top: 515px; /* Adjust this as needed to match your exact desired scroll position */
 }
 
 .testimonials,
