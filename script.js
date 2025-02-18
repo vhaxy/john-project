@@ -66,7 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
           params.append("phone", phone);
           params.append("turnstileToken", token);
 
-          // Post the data to your Google Script endpoint
           const response = await fetch(scriptURL, {
             method: "POST",
             headers: {
