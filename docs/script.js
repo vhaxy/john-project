@@ -1,5 +1,7 @@
 const scriptURL =
-  "https://script.google.com/macros/s/AKfycbzGa5wK8qZMgEUC06G0s4smN0cSeZtis6y5WN2gaq5E9XFlbMwcPdPEEbNi_dt_K4iyZA/exec";
+  "https://script.google.com/macros/s/AKfycbzYMi0esBDVYti6bmamfiCQmYxusbSwFZ310AB1hHTHBt7d_RY-0_lUINWh4ulC7DGtBw/exec";
+
+emailjs.init("R0Pu4Wojwu-6Z2RMd");
 
 document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".nav-links a, .bottom-nav a").forEach((link) => {
