@@ -5,7 +5,7 @@ const CONFIG = {
   emailJSService: "service_bpoo366",
 };
 
-emailjs.init(CONFIG.emailJSKey);
+emailjs.init("R0Pu4Wojwu-6Z2RMd");
 
 function loadTurnstile() {
   const script = document.createElement("script");
