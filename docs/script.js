@@ -1,6 +1,6 @@
 const CONFIG = {
   scriptURL: "https://script.google.com/macros/s/your-script-id/exec",
-  emailJSKey: "your-emailjs-key",
+  emailJSKey: "R0Pu4Wojwu-6Z2RMd",
   emailJSTemplate: "template_k7g1gcm",
   emailJSService: "service_bpoo366",
 };
