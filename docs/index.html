@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; 
+      script-src 'self' https://challenges.cloudflare.com https://cdn.jsdelivr.net/ https://cdnjs.cloudflare.com;
+      style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data:;
+      connect-src 'self' https://api.emailjs.com https://script.google.com;
+      frame-src 'self' https://challenges.cloudflare.com;"
+    />
     <link
       rel="icon"
       type="image/png"
@@ -27,16 +37,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-      async
-      defer
-    ></script>
     <title>GCSE Math Tutoring - Simplified</title>
   </head>
   <body data-theme="light">
     <div class="container">
-      <!-- Top Navigation -->
       <nav class="navbar top-nav">
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
@@ -45,8 +49,6 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-
-      <!-- Hero Section -->
       <div class="hero-container fade">
         <section class="hero">
           <div class="hero-content">
@@ -169,8 +171,6 @@
           </div>
         </section>
       </div>
-
-      <!-- Main Content -->
       <div class="content-wrapper">
         <div class="top-row">
           <div class="benefits-section fade">
@@ -255,13 +255,9 @@
           </div>
         </div>
       </section>
-
-      <!-- Promo Section -->
       <section class="promo-section fade">
         <h2>Struggling with GCSE Math? Let's Fix It in 12 Weeks.</h2>
       </section>
-
-      <!-- Contact & Pricing Section -->
       <section id="contact" class="contact-section fade">
         <div id="pricing" class="pricing-box fade">
           <div class="pricing-breakdown">
@@ -312,7 +308,11 @@
         </div>
         <div class="inquiry-box fade">
           <h2 class="inquiry-title">Contact Me For More Information</h2>
-          <form id="contactForm" class="contact-form">
+          <form
+            id="contactForm"
+            class="contact-form"
+            onsubmit="handleSubmit(event)"
+          >
             <div
               class="honeypot-wrapper"
               style="position: absolute; left: -10000px"
@@ -385,8 +385,6 @@
         </div>
       </section>
     </div>
-
-    <!-- Bottom Navigation for Mobile -->
     <nav class="bottom-nav">
       <ul>
         <li>
@@ -476,10 +474,7 @@
         </li>
       </ul>
     </nav>
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/email-js/3.11.0/email.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
