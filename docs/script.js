@@ -130,6 +130,55 @@ function initializeAnimations() {
   fadeElements.forEach((el) => observer.observe(el));
 }
 
+function initializeFormValidation() {
+  const formFields = document.querySelectorAll('.form-control');
+  
+  formFields.forEach(field => {
+    if (field.value.trim() !== '') {
+      field.parentElement.classList.add('valid');
+    }
+    
+    field.addEventListener('input', function() {
+      if (this.value.trim() !== '') {
+        this.parentElement.classList.add('valid');
+      } else {
+        this.parentElement.classList.remove('valid');
+      }
+      
+      if (this.type === 'email') {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailPattern.test(this.value)) {
+          this.parentElement.classList.add('valid');
+        } else {
+          this.parentElement.classList.remove('valid');
+        }
+      }
+      
+      if (this.type === 'tel') {
+        const phonePattern = /^[0-9\+\-\s]+$/;
+        if (phonePattern.test(this.value) && this.value.length >= 10) {
+          this.parentElement.classList.add('valid');
+        } else {
+          this.parentElement.classList.remove('valid');
+        }
+      }
+    });
+    
+    field.addEventListener('focus', function() {
+      this.parentElement.classList.add('focused');
+    });
+    
+    field.addEventListener('blur', function() {
+      this.parentElement.classList.remove('focused');
+      if (this.value.trim() !== '') {
+        this.parentElement.classList.add('valid');
+      } else {
+        this.parentElement.classList.remove('valid');
+      }
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   loadTurnstile();
 
@@ -158,4 +207,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   initializeAnimations();
+  
+  initializeFormValidation();
 });
