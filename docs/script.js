@@ -1,6 +1,6 @@
 const CONFIG = {
   scriptURL:
-    "https://script.google.com/macros/s/AKfycbz8iqOFb4Ot4pCRmuUypaAj-rWkOPTDOYFB-VU9pTcZKMkpLg8DahymYWiyIqjVmUSZ_Q/exec",
+    "https://script.google.com/macros/s/AKfycbympGhhf5nkbeGLYTkZk4u_p6OObOzgnIH-9F2ytcRi7T8Lx-mAmLeWGmRvJIR-k7Qtsw/exec",
   emailJSKey: "R0Pu4Wojwu-6Z2RMd",
   emailJSTemplate: "template_k7g1gcm",
   emailJSService: "service_bpoo366",
@@ -82,6 +82,7 @@ async function handleFormSubmit(form) {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: params.toString(),
+      mode: "no-cors"
     });
 
     if (!response.ok) {
