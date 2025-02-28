@@ -1,6 +1,6 @@
 const CONFIG = {
   scriptURL:
-    "https://script.google.com/macros/s/AKfycbympGhhf5nkbeGLYTkZk4u_p6OObOzgnIH-9F2ytcRi7T8Lx-mAmLeWGmRvJIR-k7Qtsw/exec",
+    "https://script.google.com/macros/s/AKfycbw2KQomfSIubE5QNnqwmA7bhQQSy9XMRhXGfaTLNckl0tQ1_sHTqzWi89jXdzYySWoH2w/exec",
   emailJSKey: "R0Pu4Wojwu-6Z2RMd",
   emailJSTemplate: "template_k7g1gcm",
   emailJSService: "service_bpoo366",
@@ -74,37 +74,18 @@ async function handleFormSubmit(form) {
       params.append(key, value);
     });
 
+    params.append("sharedSecret", "MuDR8V4xZGfuVXFlgOmLWX9YQTotdz9b");
+
     console.log("Submitting form data to:", CONFIG.scriptURL);
 
-    const response = await fetch(CONFIG.scriptURL, {
+    await fetch(CONFIG.scriptURL, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: params.toString(),
-      mode: "no-cors"
+      mode: "no-cors",
     });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Response error:", response.status, errorText);
-      throw new Error(`Network response was not ok: ${response.status}`);
-    }
-
-    const responseText = await response.text();
-    console.log("Raw response:", responseText);
-
-    let result;
-    try {
-      result = JSON.parse(responseText);
-    } catch (e) {
-      console.error("Failed to parse response as JSON:", responseText);
-      throw new Error("Invalid response from server");
-    }
-
-    if (result.result === "error") {
-      throw new Error(result.error || "Unknown error from server");
-    }
 
     showThankYouMessage();
     return true;
