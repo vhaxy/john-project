@@ -150,7 +150,7 @@
               </div>
             </div>
             <div class="hero-buttons">
-              <a
+              
                 href="download/revision-guide.pdf"
                 class="download-btn"
                 download
@@ -258,7 +258,6 @@
         <h2>Struggling with GCSE Math? Let's Fix It in 12 Weeks.</h2>
       </section>
 
-      <!-- Contact and Pricing Section -->
       <section id="contact" class="contact-section fade">
         <div id="pricing" class="pricing-box fade">
           <div class="pricing-breakdown">
@@ -412,7 +411,7 @@
               </div>
             </div>
             <div class="button-group-2">
-              <a
+              
                 href="https://buy.stripe.com/test_00g3em3Ea0Rw4vudQQ"
                 class="book-btn"
                 target="_blank"
@@ -439,11 +438,7 @@
               <p class="response-time">I'll personally reply within 24 hours</p>
             </div>
           </div>
-          <form
-            id="contactForm"
-            class="contact-form"
-            onsubmit="handleSubmit(event)"
-          >
+          <form id="contactForm" class="contact-form">
             <div
               class="honeypot-wrapper"
               style="position: absolute; left: -10000px"
@@ -573,11 +568,14 @@
               </div>
               <div class="progress-text">Step 1 of 2: Your Information</div>
             </div>
+            
             <div
               class="cf-turnstile"
               data-sitekey="0x4AAAAAAA9U149qrooH7PkU"
-              data-size="invisible"
+              data-callback="turnstileCallback"
             ></div>
+            
+            <input type="hidden" id="turnstileToken" name="turnstileToken">
 
             <button type="submit" class="submit-btn">
               <div class="submit-wrapper">
@@ -698,6 +696,11 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
     ></script>
+    <script>
+      function turnstileCallback(token) {
+        document.getElementById('turnstileToken').value = token;
+      }
+    </script>
     <script src="script.js"></script>
   </body>
 </html>

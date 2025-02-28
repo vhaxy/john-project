@@ -1,5 +1,6 @@
 const CONFIG = {
-  scriptURL: "https://script.google.com/macros/s/your-script-id/exec",
+  scriptURL:
+    "https://script.google.com/macros/s/AKfycbz8iqOFb4Ot4pCRmuUypaAj-rWkOPTDOYFB-VU9pTcZKMkpLg8DahymYWiyIqjVmUSZ_Q/exec",
   emailJSKey: "R0Pu4Wojwu-6Z2RMd",
   emailJSTemplate: "template_k7g1gcm",
   emailJSService: "service_bpoo366",
@@ -55,6 +56,12 @@ async function handleFormSubmit(form) {
     const userEmail = formData.get("email");
     const phone = formData.get("phone").toString();
     const fullName = `${firstName} ${lastName}`;
+    const turnstileToken = formData.get("turnstileToken");
+
+    if (!turnstileToken) {
+      alert("Please complete the security check before submitting.");
+      return false;
+    }
 
     await emailjs.send(CONFIG.emailJSService, CONFIG.emailJSTemplate, {
       name: fullName,
@@ -67,6 +74,8 @@ async function handleFormSubmit(form) {
       params.append(key, value);
     });
 
+    console.log("Submitting form data to:", CONFIG.scriptURL);
+
     const response = await fetch(CONFIG.scriptURL, {
       method: "POST",
       headers: {
@@ -75,14 +84,34 @@ async function handleFormSubmit(form) {
       body: params.toString(),
     });
 
-    if (!response.ok) throw new Error("Network response was not ok");
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Response error:", response.status, errorText);
+      throw new Error(`Network response was not ok: ${response.status}`);
+    }
+
+    const responseText = await response.text();
+    console.log("Raw response:", responseText);
+
+    let result;
+    try {
+      result = JSON.parse(responseText);
+    } catch (e) {
+      console.error("Failed to parse response as JSON:", responseText);
+      throw new Error("Invalid response from server");
+    }
+
+    if (result.result === "error") {
+      throw new Error(result.error || "Unknown error from server");
+    }
 
     showThankYouMessage();
     return true;
   } catch (error) {
     console.error("Form submission error:", error);
     alert(
-      "There was an error processing your inquiry. Please try again later."
+      "There was an error processing your inquiry. Please try again later. " +
+        (error.message || "Unknown error")
     );
     return false;
   }
@@ -98,7 +127,7 @@ function showThankYouMessage() {
   setTimeout(() => {
     formElement.style.display = "none";
     thankYouElement.style.display = "block";
-    void thankYouElement.offsetWidth; 
+    void thankYouElement.offsetWidth;
     thankYouElement.classList.add("visible");
   }, 300);
 }
@@ -131,49 +160,49 @@ function initializeAnimations() {
 }
 
 function initializeFormValidation() {
-  const formFields = document.querySelectorAll('.form-control');
-  
-  formFields.forEach(field => {
-    if (field.value.trim() !== '') {
-      field.parentElement.classList.add('valid');
+  const formFields = document.querySelectorAll(".form-control");
+
+  formFields.forEach((field) => {
+    if (field.value.trim() !== "") {
+      field.parentElement.classList.add("valid");
     }
-    
-    field.addEventListener('input', function() {
-      if (this.value.trim() !== '') {
-        this.parentElement.classList.add('valid');
+
+    field.addEventListener("input", function () {
+      if (this.value.trim() !== "") {
+        this.parentElement.classList.add("valid");
       } else {
-        this.parentElement.classList.remove('valid');
+        this.parentElement.classList.remove("valid");
       }
-      
-      if (this.type === 'email') {
+
+      if (this.type === "email") {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (emailPattern.test(this.value)) {
-          this.parentElement.classList.add('valid');
+          this.parentElement.classList.add("valid");
         } else {
-          this.parentElement.classList.remove('valid');
+          this.parentElement.classList.remove("valid");
         }
       }
-      
-      if (this.type === 'tel') {
+
+      if (this.type === "tel") {
         const phonePattern = /^[0-9\+\-\s]+$/;
         if (phonePattern.test(this.value) && this.value.length >= 10) {
-          this.parentElement.classList.add('valid');
+          this.parentElement.classList.add("valid");
         } else {
-          this.parentElement.classList.remove('valid');
+          this.parentElement.classList.remove("valid");
         }
       }
     });
-    
-    field.addEventListener('focus', function() {
-      this.parentElement.classList.add('focused');
+
+    field.addEventListener("focus", function () {
+      this.parentElement.classList.add("focused");
     });
-    
-    field.addEventListener('blur', function() {
-      this.parentElement.classList.remove('focused');
-      if (this.value.trim() !== '') {
-        this.parentElement.classList.add('valid');
+
+    field.addEventListener("blur", function () {
+      this.parentElement.classList.remove("focused");
+      if (this.value.trim() !== "") {
+        this.parentElement.classList.add("valid");
       } else {
-        this.parentElement.classList.remove('valid');
+        this.parentElement.classList.remove("valid");
       }
     });
   });
@@ -207,6 +236,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   initializeAnimations();
-  
+
   initializeFormValidation();
 });
