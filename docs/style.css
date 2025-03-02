@@ -1528,3 +1528,45 @@ textarea {
     height: 50px !important;
   }
 }
+
+/* Fix thank you message alignment and spacing */
+#thankYouMessage {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#thankYouMessage.visible {
+  opacity: 1;
+}
+
+.success-content {
+  text-align: center;
+  padding: 1rem 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.success-content h2 {
+  color: white !important;
+  margin-bottom: 1rem;
+}
+
+.success-content p {
+  margin-bottom: 1.5rem;
+}
+
+.next-steps {
+  margin-top: 1rem;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.next-steps-progress {
+  margin-top: auto;
+  padding-top: 2rem;
+}
