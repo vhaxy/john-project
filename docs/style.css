@@ -1663,7 +1663,6 @@ textarea {
 }
 
 .next-steps li::before {
-  content: "•";
   color: white;
   position: absolute;
   left: 0;
@@ -1681,4 +1680,21 @@ textarea {
   .next-steps li::before {
     font-size: 1rem; 
   }
+}
+
+.next-steps ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start; 
+}
+
+.next-steps li {
+  padding: 0.8rem 0;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 0; 
 }
