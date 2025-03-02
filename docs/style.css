@@ -1565,7 +1565,7 @@ textarea {
   .next-steps li {
     padding: 0.6rem 0;
     padding-left: 1.5rem; 
-    line-height: 1.1;
+    line-height: 1.6;
     display: flex; 
   }
   
@@ -1577,7 +1577,7 @@ textarea {
 @media (max-width: 480px) {
   .next-steps li {
     padding-left: 1.2rem; 
-    line-height: 1.1;
+    line-height: 1.6;
   }
   
   .next-steps li::before {
