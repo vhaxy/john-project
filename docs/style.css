@@ -1295,7 +1295,7 @@ textarea {
 
 @media (max-width: 480px) {
   .hero-buttons .download-btn {
-    min-width: 267px; 
+    min-width: 267px;
     max-width: 350px;
   }
 }
@@ -1511,7 +1511,7 @@ textarea {
   color: white;
   position: relative;
   padding-left: 1.5rem;
-  display: flex; 
+  display: flex;
   align-items: center;
 }
 
@@ -1554,22 +1554,22 @@ textarea {
   #thankYouMessage {
     padding: 1.5rem;
   }
-  
+
   .thank-you-header {
     margin-bottom: 1.5rem;
   }
-  
+
   .next-steps h3 {
     margin-bottom: 1rem;
   }
-  
+
   .next-steps li {
     padding: 0.6rem 0;
-    padding-left: 1.5rem; 
+    padding-left: 1.5rem;
     line-height: 1.6;
-    display: flex; 
+    display: flex;
   }
-  
+
   .next-steps li::before {
     top: 1.1rem;
   }
@@ -1577,12 +1577,12 @@ textarea {
 
 @media (max-width: 480px) {
   .next-steps li {
-    padding-left: 1.2rem; 
+    padding-left: 1.2rem;
     line-height: 1.6;
   }
-  
+
   .next-steps li::before {
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
     top: 1rem;
   }
 }
@@ -1595,7 +1595,7 @@ textarea {
     line-height: 1.4;
     margin-bottom: 0.8rem;
   }
-  
+
   .next-steps li::before {
     content: "•";
     position: absolute;
@@ -1641,7 +1641,8 @@ textarea {
 }
 
 .review-card .review-icon::after {
-  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    sans-serif;
 }
 
 .next-steps ul {
@@ -1649,7 +1650,7 @@ textarea {
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: flex-start;
 }
 
@@ -1659,7 +1660,7 @@ textarea {
   position: relative;
   padding-left: 1.5rem;
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 .next-steps li::before {
@@ -1672,29 +1673,32 @@ textarea {
 
 @media (max-width: 768px) {
   .next-steps li::before {
-    font-size: 1.2rem;  
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
   .next-steps li::before {
-    font-size: 1rem; 
+    font-size: 1rem;
   }
 }
 
+.next-steps {
+  text-align: center !important;
+}
+
 .next-steps ul {
-  list-style: none; 
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column; 
-  align-items: flex-start; 
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 auto !important;
 }
 
 .next-steps li {
-  padding: 0.8rem 0;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding-left: 0; 
+  position: static !important;
+  padding-left: 0 !important;
+  margin-bottom: 0.8rem;
+}
+
+.next-steps li::before {
+  content: none !important;
 }
