@@ -1570,3 +1570,93 @@ textarea {
   margin-top: auto;
   padding-top: 2rem;
 }
+
+/* Thank you message styling - revised */
+#thankYouMessage {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#thankYouMessage.visible {
+  opacity: 1;
+}
+
+.success-content {
+  text-align: center;
+  padding: 1rem 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 0;
+}
+
+.success-content h2 {
+  color: white !important;
+  margin-bottom: 1rem;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.success-content p {
+  margin-bottom: 1.5rem;
+}
+
+.next-steps {
+  margin-top: 2rem;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.next-steps h3 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.next-steps ul {
+  list-style: none;
+  padding: 0;
+}
+
+.next-steps li {
+  padding: 0.5rem 0;
+  color: #94a3b8;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.next-steps li::before {
+  content: "✓";
+  color: #00c5d2;
+  position: absolute;
+  left: 0;
+}
+
+.next-steps-progress {
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.next-steps-progress .progress-bar {
+  height: 6px;
+  background-color: #3f4c6b;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.next-steps-progress .progress-fill {
+  height: 100%;
+  width: 100%;
+  background-color: white !important;
+  border-radius: 3px;
+}
+
+.next-steps-progress .progress-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
