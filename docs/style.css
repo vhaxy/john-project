@@ -1529,238 +1529,7 @@ textarea {
   }
 }
 
-/* Fix thank you message alignment and spacing */
-#thankYouMessage {
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-#thankYouMessage.visible {
-  opacity: 1;
-}
-
-.success-content {
-  text-align: center;
-  padding: 1rem 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.success-content h2 {
-  color: white !important;
-  margin-bottom: 1rem;
-}
-
-.success-content p {
-  margin-bottom: 1.5rem;
-}
-
-.next-steps {
-  margin-top: 1rem;
-  text-align: left;
-  flex-grow: 1;
-}
-
-.next-steps-progress {
-  margin-top: auto;
-  padding-top: 2rem;
-}
-
-/* Thank you message styling - revised */
-#thankYouMessage {
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-#thankYouMessage.visible {
-  opacity: 1;
-}
-
-.success-content {
-  text-align: center;
-  padding: 1rem 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin-top: 0;
-}
-
-.success-content h2 {
-  color: white !important;
-  margin-bottom: 1rem;
-  padding-top: 0;
-  margin-top: 0;
-}
-
-.success-content p {
-  margin-bottom: 1.5rem;
-}
-
-.next-steps {
-  margin-top: 2rem;
-  text-align: left;
-  flex-grow: 1;
-}
-
-.next-steps h3 {
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.next-steps ul {
-  list-style: none;
-  padding: 0;
-}
-
-.next-steps li {
-  padding: 0.5rem 0;
-  color: #94a3b8;
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.next-steps li::before {
-  content: "✓";
-  color: #00c5d2;
-  position: absolute;
-  left: 0;
-}
-
-.next-steps-progress {
-  margin-top: 2rem;
-  padding-top: 1rem;
-}
-
-.next-steps-progress .progress-bar {
-  height: 6px;
-  background-color: #3f4c6b;
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
-
-.next-steps-progress .progress-fill {
-  height: 100%;
-  width: 100%;
-  background-color: white !important;
-  border-radius: 3px;
-}
-
-.next-steps-progress .progress-text {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #94a3b8;
-}
-
-/* Thank you message styling - revised with explicit top positioning */
-#thankYouMessage {
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-#thankYouMessage.visible {
-  opacity: 1;
-}
-
-.thank-you-header {
-  padding-top: 1rem;
-}
-
-.success-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 100%;
-  padding: 0;
-}
-
-.success-content h2 {
-  color: white !important;
-  margin-bottom: 1rem;
-  margin-top: 0;
-}
-
-.success-content p {
-  margin-bottom: 1.5rem;
-}
-
-.next-steps {
-  margin-top: 1rem;
-  text-align: left;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.next-steps h3 {
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.next-steps ul {
-  list-style: none;
-  padding: 0;
-}
-
-.next-steps li {
-  padding: 0.5rem 0;
-  color: #94a3b8;
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.next-steps li::before {
-  content: "✓";
-  color: #00c5d2;
-  position: absolute;
-  left: 0;
-}
-
-.next-steps-progress {
-  margin-top: auto;
-  padding-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.next-steps-progress .progress-bar {
-  height: 6px;
-  background-color: #3f4c6b;
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
-
-.next-steps-progress .progress-fill {
-  height: 100%;
-  width: 100%;
-  background-color: white !important;
-  border-radius: 3px;
-}
-
-.next-steps-progress .progress-text {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #94a3b8;
-}
-
-/* Thank You Message Styling - Clean Implementation */
+/* Thank You Message Styling - Improved Implementation */
 #thankYouMessage {
   position: absolute;
   top: 0;
@@ -1820,16 +1589,19 @@ textarea {
 
 .next-steps li {
   padding: 0.8rem 0;
-  color: #94a3b8;
+  color: white;
   position: relative;
   padding-left: 1.5rem;
 }
 
 .next-steps li::before {
-  content: "✓";
-  color: #00c5d2;
+  content: "•";
+  color: white;
   position: absolute;
   left: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  top: 0.6rem;
 }
 
 .next-steps-progress {
@@ -1858,7 +1630,6 @@ textarea {
   color: #94a3b8;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   #thankYouMessage {
     padding: 1.5rem;
@@ -1874,5 +1645,23 @@ textarea {
   
   .next-steps li {
     padding: 0.6rem 0;
+    padding-left: 1.5rem; 
+    display: flex; 
+  }
+  
+  .next-steps li::before {
+    top: 0.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .next-steps li {
+    padding-left: 1.2rem; 
+    line-height: 1.4;
+  }
+  
+  .next-steps li::before {
+    font-size: 1.2rem; 
+    top: 0.5rem;
   }
 }
