@@ -25,7 +25,17 @@ function handleSmoothScroll(targetId) {
 
   let targetPosition;
   if (targetId === "#contact" && window.innerWidth <= 768) {
-    targetPosition = document.body.scrollHeight - window.innerHeight;
+    const contactSection = document.querySelector("#contact");
+    const inquiryBox = document.querySelector(".inquiry-box");
+    
+    if (contactSection && inquiryBox) {
+      const inquiryBoxRect = inquiryBox.getBoundingClientRect();
+      const inquiryBoxTop = inquiryBoxRect.top + window.pageYOffset;
+      
+      targetPosition = inquiryBoxTop - 90;
+    } else {
+      targetPosition = document.body.scrollHeight - window.innerHeight;
+    }
   } else {
     targetPosition =
       targetElement.getBoundingClientRect().top +
@@ -124,17 +134,20 @@ function formatPhoneNumber(input) {
 
 function initializeAnimations() {
   const fadeElements = document.querySelectorAll(".fade");
+  
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("in-view");
+        } else {
+          entry.target.classList.remove("in-view");
         }
       });
     },
     {
       threshold: 0.1,
-      rootMargin: "50px",
+      rootMargin: "50px 0px"
     }
   );
   fadeElements.forEach((el) => observer.observe(el));
