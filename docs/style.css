@@ -1660,3 +1660,102 @@ textarea {
   font-size: 0.9rem;
   color: #94a3b8;
 }
+
+/* Thank you message styling - revised with explicit top positioning */
+#thankYouMessage {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#thankYouMessage.visible {
+  opacity: 1;
+}
+
+.thank-you-header {
+  padding-top: 1rem;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  padding: 0;
+}
+
+.success-content h2 {
+  color: white !important;
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+.success-content p {
+  margin-bottom: 1.5rem;
+}
+
+.next-steps {
+  margin-top: 1rem;
+  text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.next-steps h3 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.next-steps ul {
+  list-style: none;
+  padding: 0;
+}
+
+.next-steps li {
+  padding: 0.5rem 0;
+  color: #94a3b8;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.next-steps li::before {
+  content: "✓";
+  color: #00c5d2;
+  position: absolute;
+  left: 0;
+}
+
+.next-steps-progress {
+  margin-top: auto;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.next-steps-progress .progress-bar {
+  height: 6px;
+  background-color: #3f4c6b;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.next-steps-progress .progress-fill {
+  height: 100%;
+  width: 100%;
+  background-color: white !important;
+  border-radius: 3px;
+}
+
+.next-steps-progress .progress-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
