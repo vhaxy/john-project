@@ -1691,6 +1691,7 @@ textarea {
   list-style: none !important;
   padding: 0 !important;
   margin: 0 auto !important;
+  text-align: center;
 }
 
 .next-steps li {
@@ -1701,4 +1702,20 @@ textarea {
 
 .next-steps li::before {
   content: none !important;
+}
+
+@media (max-width: 768px) {
+  .hero-buttons .download-btn:hover .button-text,
+  .button-group-2 a:hover .button-text,
+  .submit-btn:hover .submit-text {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .hero-buttons .download-btn:hover .button-icon,
+  .button-group-2 a:hover .button-icon,
+  .submit-btn:hover .submit-icon {
+    transform: none !important;
+    opacity: 0 !important;
+  }
 }
