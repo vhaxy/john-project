@@ -842,87 +842,6 @@ textarea:focus {
   justify-content: center;
 }
 
-/* Thank you message */
-#thankYouMessage {
-  opacity: 0;
-  transition: opacity 0.3s ease-out;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-#thankYouMessage.visible {
-  opacity: 1;
-}
-
-.success-content {
-  text-align: center;
-  padding: 1rem 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.success-content h2 {
-  color: white !important;
-  margin-bottom: 1rem;
-}
-
-.next-steps {
-  margin-top: auto;
-  text-align: left;
-}
-
-.next-steps h3 {
-  color: white;
-  margin-bottom: 1rem;
-}
-
-.next-steps ul {
-  list-style: none;
-  padding: 0;
-}
-
-.next-steps li {
-  padding: 1rem 0;
-  color: #94a3b8;
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.next-steps li::before {
-  content: "✓";
-  color: white;
-  position: absolute;
-  left: 0;
-}
-
-.next-steps-progress {
-  margin-top: 1.5rem;
-}
-
-.next-steps-progress .progress-bar {
-  height: 6px;
-  background-color: #3f4c6b;
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
-
-.next-steps-progress .progress-fill {
-  height: 100%;
-  width: 100%;
-  background-color: white !important;
-  border-radius: 3px;
-}
-
-.next-steps-progress .progress-text {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #94a3b8;
-}
-
 .secure-payment {
   display: none !important;
 }
@@ -999,12 +918,12 @@ textarea:focus {
 
   .bottom-nav a:hover,
   .bottom-nav a.active {
-    color: #00c5d2;
+    color: white;
   }
 
   .bottom-nav a:hover svg,
   .bottom-nav a.active svg {
-    stroke: #3fe0cb;
+    stroke: white;
   }
 
   .hero {
@@ -1375,7 +1294,7 @@ textarea {
 
 @media (max-width: 480px) {
   .hero-buttons .download-btn {
-    min-width: 267px; /* Even smaller on very small screens */
+    min-width: 267px; 
     max-width: 350px;
   }
 }
@@ -1529,7 +1448,6 @@ textarea {
   }
 }
 
-/* Thank You Message Styling - Improved Implementation */
 #thankYouMessage {
   position: absolute;
   top: 0;
@@ -1592,6 +1510,8 @@ textarea {
   color: white;
   position: relative;
   padding-left: 1.5rem;
+  display: flex; 
+  align-items: center;
 }
 
 .next-steps li::before {
@@ -1600,8 +1520,10 @@ textarea {
   position: absolute;
   left: 0;
   font-size: 1.5rem;
-  line-height: 1;
-  top: 0.6rem;
+  /* line-height: 1; */
+  line-height: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .next-steps-progress {
