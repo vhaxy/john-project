@@ -1520,10 +1520,7 @@ textarea {
   position: absolute;
   left: 0;
   font-size: 1.5rem;
-  /* line-height: 1; */
-  line-height: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  line-height: 1;
 }
 
 .next-steps-progress {
