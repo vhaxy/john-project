@@ -448,6 +448,7 @@ textarea:focus {
 }
 
 .review-icon {
+  font-size: 40px;
   width: 70px;
   height: 70px;
   margin-bottom: 1.2rem;
@@ -1584,4 +1585,62 @@ textarea {
     font-size: 1.2rem; 
     top: 1rem;
   }
+}
+
+/* Fix bullet point alignment on small screens */
+@media (max-width: 768px) {
+  .next-steps li {
+    display: flex;
+    align-items: flex-start;
+    padding-left: 1.5rem;
+    line-height: 1.4;
+    margin-bottom: 0.8rem;
+  }
+  
+  .next-steps li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .next-steps li {
+    padding-left: 1.2rem;
+  }
+}
+
+.review-card .review-icon img {
+  display: none;
+}
+
+.review-card .review-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  border: none;
+  font-size: 50px;
+}
+
+.review-card:nth-child(1) .review-icon::after {
+  content: "👨‍🏫";
+}
+
+.review-card:nth-child(2) .review-icon::after {
+  content: "📚";
+}
+
+.review-card:nth-child(3) .review-icon::after {
+  content: "✏️";
+}
+
+.review-card:nth-child(4) .review-icon::after {
+  content: "💡";
+}
+
+.review-card .review-icon::after {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
