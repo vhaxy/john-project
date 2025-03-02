@@ -1,6 +1,6 @@
 const CONFIG = {
   scriptURL:
-    "https://script.google.com/macros/s/AKfycbwg5e08uPkaoMt0wJd3jitRIwY_8LKaAZfUwvAmNMXZYOjCni2DHn8CNvJ89_7ksmr9/exec",
+    "https://script.google.com/macros/s/AKfycbzIm8Wwb3pp0sI8xE0OA0la5UXlJC1_MS5wz1LKTrGrnnB6U9JbhvKvChbY4gGkUMeGgg/exec",
   emailJSKey: "R0Pu4Wojwu-6Z2RMd",
   emailJSTemplate: "template_k7g1gcm",
   emailJSService: "service_bpoo366",

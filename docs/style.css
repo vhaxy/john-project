@@ -28,7 +28,7 @@ body::-webkit-scrollbar {
 
 body {
   background-image: linear-gradient(
-    to right top,
+    to right bottom,
     #1a1a2e,
     #16213e,
     #1b2a4e,
