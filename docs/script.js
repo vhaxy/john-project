@@ -283,33 +283,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll(buttonSelector);
     
     buttons.forEach(button => {
-      button.addEventListener('click', function(e) {
-        if (button.tagName === 'A') {
-          e.preventDefault();
-        }
-        
-        const textElement = button.querySelector('.button-text') || button.querySelector('.submit-text');
-        const iconElement = button.querySelector('.button-icon') || button.querySelector('.submit-icon');
-        
-        if (textElement) textElement.style.transform = 'translateY(-100%)';
-        if (textElement) textElement.style.opacity = '0';
-        if (iconElement) iconElement.style.transform = 'translateY(0)';
-        if (iconElement) iconElement.style.opacity = '1';
-        
-        setTimeout(() => {
+      if (button.tagName === 'A') {
+        button.addEventListener('click', function() {
+          const textElement = button.querySelector('.button-text');
+          const iconElement = button.querySelector('.button-icon');
+          
+          if (textElement) textElement.style.transform = 'translateY(-100%)';
+          if (textElement) textElement.style.opacity = '0';
+          if (iconElement) iconElement.style.transform = 'translateY(0)';
+          if (iconElement) iconElement.style.opacity = '1';
+        });
+      } else {
+        button.addEventListener('click', function(e) {
+          const textElement = button.querySelector('.button-text') || button.querySelector('.submit-text');
+          const iconElement = button.querySelector('.button-icon') || button.querySelector('.submit-icon');
+          
+          if (textElement) textElement.style.transform = 'translateY(-100%)';
+          if (textElement) textElement.style.opacity = '0';
+          if (iconElement) iconElement.style.transform = 'translateY(0)';
+          if (iconElement) iconElement.style.opacity = '1';
+          
           if (actionFunction) {
             actionFunction(button);
-          } else if (button.tagName === 'A' && button.href) {
-            if (button.getAttribute('download')) {
-              const link = document.createElement('a');
-              link.href = button.href;
-              link.download = button.getAttribute('download') || '';
-              link.click();
-            } else if (button.target === '_blank') {
-              window.open(button.href, '_blank');
-            } else {
-              window.location.href = button.href;
-            }
           }
           
           setTimeout(() => {
@@ -317,10 +312,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (textElement) textElement.style.opacity = '1';
             if (iconElement) iconElement.style.transform = 'translateY(100%)';
             if (iconElement) iconElement.style.opacity = '0';
-          }, 500); 
-          
-        }, 300); 
-      });
+          }, 500);
+        });
+      }
     });
   }
   
@@ -331,7 +325,6 @@ document.addEventListener("DOMContentLoaded", function () {
   setupButtonAction('.submit-btn', function(button) {
     const form = button.closest('form');
     if (form) {
-      // Create and dispatch a submit event to trigger normal form submission
       const submitEvent = new Event('submit', {
         bubbles: true,
         cancelable: true
