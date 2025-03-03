@@ -1704,7 +1704,7 @@ textarea {
   content: none !important;
 }
 
-.thank-you-header, 
+.thank-you-header,
 .next-steps h3,
 .next-steps ul,
 .next-steps li {
@@ -1768,7 +1768,7 @@ textarea {
   .download-btn,
   .book-btn,
   .submit-btn {
-    -webkit-tap-highlight-color: transparent; 
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -1798,7 +1798,7 @@ textarea {
   height: 100%;
 }
 
-.thank-you-header, 
+.thank-you-header,
 .next-steps h3,
 .next-steps ul,
 .next-steps li {
@@ -1828,7 +1828,7 @@ textarea {
 
 .next-steps h3 {
   color: white;
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-bottom: 2.5rem;
   text-align: center;
 }
@@ -1882,5 +1882,53 @@ textarea {
 @media (max-width: 480px) {
   .next-steps li {
     margin-bottom: 0.5rem;
+  }
+}
+
+.hero-buttons .download-btn,
+.button-group-2 a.book-btn,
+.submit-btn {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.hero-buttons .button-text,
+.hero-buttons .button-icon,
+.button-text,
+.button-icon,
+.submit-text,
+.submit-icon {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.hero-buttons .download-btn,
+.button-group-2 a.book-btn {
+  position: relative;
+}
+
+.hero-buttons .download-btn:active .button-text,
+.button-group-2 a.book-btn:active .button-text,
+.submit-btn:active .submit-text {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.15s ease;
+}
+
+.hero-buttons .download-btn:active .button-icon,
+.button-group-2 a.book-btn:active .button-icon,
+.submit-btn:active .submit-icon {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.15s ease;
+}
+
+@media (max-width: 768px) {
+  .download-btn,
+  .book-btn,
+  .submit-btn {
+    -webkit-tap-highlight-color: transparent;
   }
 }
