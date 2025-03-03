@@ -232,4 +232,52 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeAnimations();
 
   initializeFormValidation();
+
+  function setupButtonAction(buttonSelector, actionFunction) {
+    const buttons = document.querySelectorAll(buttonSelector);
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        if (button.tagName === 'A') {
+          e.preventDefault();
+        }
+        
+        const textElement = button.querySelector('.button-text') || button.querySelector('.submit-text');
+        const iconElement = button.querySelector('.button-icon') || button.querySelector('.submit-icon');
+        
+        if (textElement) textElement.style.transform = 'translateY(-100%)';
+        if (textElement) textElement.style.opacity = '0';
+        if (iconElement) iconElement.style.transform = 'translateY(0)';
+        if (iconElement) iconElement.style.opacity = '1';
+        
+        setTimeout(() => {
+          if (actionFunction) {
+            actionFunction(button);
+          } else if (button.tagName === 'A' && button.href) {
+            if (button.getAttribute('download')) {
+              const link = document.createElement('a');
+              link.href = button.href;
+              link.download = button.getAttribute('download') || '';
+              link.click();
+            } else if (button.target === '_blank') {
+              window.open(button.href, '_blank');
+            } else {
+              window.location.href = button.href;
+            }
+          }
+        }, 300); 
+      });
+    });
+  }
+  
+  setupButtonAction('.download-btn');
+  
+  setupButtonAction('.book-btn');
+
+  setupButtonAction('.submit-btn', function(button) {
+    const form = button.closest('form');
+    if (form) {
+      form.submit();
+    }
+  });
 });
