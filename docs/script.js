@@ -16,19 +16,19 @@ function loadTurnstile() {
   document.head.appendChild(script);
 }
 
-function initializeTurnstile() {
-  try {
-    turnstile.render('#turnstile-container', {
-      sitekey: '0x4AAAAAAA9U149qrooH7PkU',
-      callback: function(token) {
-        document.getElementById('turnstileToken').value = token;
-      }
-    });
-    console.log("Turnstile initialized");
-  } catch (error) {
-    console.error("Turnstile initialization error:", error);
-  }
-}
+// function initializeTurnstile() {
+//   try {
+//     turnstile.render('#turnstile-container', {
+//       sitekey: '0x4AAAAAAA9U149qrooH7PkU',
+//       callback: function(token) {
+//         document.getElementById('turnstileToken').value = token;
+//       }
+//     });
+//     console.log("Turnstile initialized");
+//   } catch (error) {
+//     console.error("Turnstile initialization error:", error);
+//   }
+// }
 
 function handleSmoothScroll(targetId) {
   const targetElement = document.querySelector(targetId);
@@ -287,7 +287,12 @@ document.addEventListener("DOMContentLoaded", function () {
   setupButtonAction('.submit-btn', function(button) {
     const form = button.closest('form');
     if (form) {
-      form.submit();
+      // Create and dispatch a submit event to trigger normal form submission
+      const submitEvent = new Event('submit', {
+        bubbles: true,
+        cancelable: true
+      });
+      form.dispatchEvent(submitEvent);
     }
   });
 
@@ -295,5 +300,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   initializeFormValidation();
 
-  setTimeout(initializeTurnstile, 1000);
+  // setTimeout(initializeTurnstile, 1000);
 });
