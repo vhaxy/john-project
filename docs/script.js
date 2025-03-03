@@ -229,10 +229,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  initializeAnimations();
-
-  initializeFormValidation();
-
   function setupButtonAction(buttonSelector, actionFunction) {
     const buttons = document.querySelectorAll(buttonSelector);
     
@@ -280,4 +276,9 @@ document.addEventListener("DOMContentLoaded", function () {
       form.submit();
     }
   });
+  
+  initializeAnimations();
+
+  initializeFormValidation();
+
 });
