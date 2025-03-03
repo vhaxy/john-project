@@ -41,11 +41,11 @@ function handleSmoothScroll(targetId) {
   if (targetId === "#contact" && window.innerWidth <= 768) {
     const contactSection = document.querySelector("#contact");
     const inquiryBox = document.querySelector(".inquiry-box");
-    
+
     if (contactSection && inquiryBox) {
       const inquiryBoxRect = inquiryBox.getBoundingClientRect();
       const inquiryBoxTop = inquiryBoxRect.top + window.pageYOffset;
-      
+
       targetPosition = inquiryBoxTop - 90;
     } else {
       targetPosition = document.body.scrollHeight - window.innerHeight;
@@ -132,19 +132,19 @@ function showThankYouMessage() {
   setTimeout(() => {
     formElement.style.display = "none";
     thankYouElement.style.display = "block";
-    thankYouElement.style.textAlign = "center"; 
-    
-    const elements = thankYouElement.querySelectorAll('h2, h3, p, li');
-    elements.forEach(el => {
+    thankYouElement.style.textAlign = "center";
+
+    const elements = thankYouElement.querySelectorAll("h2, h3, p, li");
+    elements.forEach((el) => {
       el.style.textAlign = "center";
     });
-    
-    const listItems = thankYouElement.querySelectorAll('li');
-    listItems.forEach(item => {
+
+    const listItems = thankYouElement.querySelectorAll("li");
+    listItems.forEach((item) => {
       item.style.listStyle = "none";
       item.style.paddingLeft = "0";
     });
-    
+
     void thankYouElement.offsetWidth;
     thankYouElement.classList.add("visible");
   }, 300);
@@ -161,7 +161,7 @@ function formatPhoneNumber(input) {
 
 function initializeAnimations() {
   const fadeElements = document.querySelectorAll(".fade");
-  
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -174,7 +174,7 @@ function initializeAnimations() {
     },
     {
       threshold: 0.1,
-      rootMargin: "50px 0px"
+      rootMargin: "50px 0px",
     }
   );
   fadeElements.forEach((el) => observer.observe(el));
@@ -238,24 +238,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const submitBtn = contactForm.querySelector('.submit-btn');
+      const submitBtn = contactForm.querySelector(".submit-btn");
       if (submitBtn) {
-        const textElement = submitBtn.querySelector('.submit-text');
-        const iconElement = submitBtn.querySelector('.submit-icon');
-        
-        if (textElement) textElement.style.transform = 'translateY(-100%)';
-        if (textElement) textElement.style.opacity = '0';
-        if (iconElement) iconElement.style.transform = 'translateY(0)';
-        if (iconElement) iconElement.style.opacity = '1';
-        
+        const textElement = submitBtn.querySelector(".submit-text");
+        const iconElement = submitBtn.querySelector(".submit-icon");
+
+        if (textElement) textElement.style.transform = "translateY(-100%)";
+        if (textElement) textElement.style.opacity = "0";
+        if (iconElement) iconElement.style.transform = "translateY(0)";
+        if (iconElement) iconElement.style.opacity = "1";
+
         setTimeout(async () => {
           const success = await handleFormSubmit(e.target);
           if (!success) {
             setTimeout(() => {
-              if (textElement) textElement.style.transform = 'translateY(0)';
-              if (textElement) textElement.style.opacity = '1';
-              if (iconElement) iconElement.style.transform = 'translateY(100%)';
-              if (iconElement) iconElement.style.opacity = '0';
+              if (textElement) textElement.style.transform = "translateY(0)";
+              if (textElement) textElement.style.opacity = "1";
+              if (iconElement) iconElement.style.transform = "translateY(100%)";
+              if (iconElement) iconElement.style.opacity = "0";
             }, 500);
           }
         }, 300);
@@ -281,66 +281,79 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function setupButtonAction(buttonSelector, actionFunction) {
     const buttons = document.querySelectorAll(buttonSelector);
-    
-    buttons.forEach(button => {
-      const originalHref = button.tagName === 'A' ? button.href : null;
-      const originalDownload = button.tagName === 'A' ? button.getAttribute('download') : null;
-      const originalTarget = button.tagName === 'A' ? button.target : null;
-      
-      button.addEventListener('click', function(e) {
+
+    buttons.forEach((button) => {
+      const originalHref =
+        button.tagName === "A" ? button.getAttribute("href") : null;
+      const originalDownload =
+        button.tagName === "A" ? button.getAttribute("download") : null;
+      const originalTarget =
+        button.tagName === "A" ? button.getAttribute("target") : null;
+
+      button.addEventListener("click", function (e) {
         e.preventDefault();
-        
-        const textElement = button.querySelector('.button-text') || button.querySelector('.submit-text');
-        const iconElement = button.querySelector('.button-icon') || button.querySelector('.submit-icon');
-        
-        if (textElement) textElement.style.transform = 'translateY(-100%)';
-        if (textElement) textElement.style.opacity = '0';
-        if (iconElement) iconElement.style.transform = 'translateY(0)';
-        if (iconElement) iconElement.style.opacity = '1';
-        
-        if (actionFunction) {
-          actionFunction(button);
-        } else if (button.tagName === 'A' && originalHref) {
-          if (originalDownload) {
-            const link = document.createElement('a');
-            link.href = originalHref;
-            link.download = originalDownload || '';
-            link.click();
-          } else if (originalTarget === '_blank') {
-            window.open(originalHref, '_blank');
-          } else {
-            window.location.href = originalHref;
-          }
-        }
-        
+
+        const textElement =
+          button.querySelector(".button-text") ||
+          button.querySelector(".submit-text");
+        const iconElement =
+          button.querySelector(".button-icon") ||
+          button.querySelector(".submit-icon");
+
+        // Show animation
+        if (textElement) textElement.style.transform = "translateY(-100%)";
+        if (textElement) textElement.style.opacity = "0";
+        if (iconElement) iconElement.style.transform = "translateY(0)";
+        if (iconElement) iconElement.style.opacity = "1";
+
+        // Set a short timeout to allow the animation to start before performing the action
         setTimeout(() => {
-          if (textElement) textElement.style.transform = 'translateY(0)';
-          if (textElement) textElement.style.opacity = '1';
-          if (iconElement) iconElement.style.transform = 'translateY(100%)';
-          if (iconElement) iconElement.style.opacity = '0';
-        }, 800);
+          if (actionFunction) {
+            actionFunction(button);
+          } else if (button.tagName === "A" && originalHref) {
+            if (originalDownload) {
+              // Create and trigger a download link programmatically
+              const link = document.createElement("a");
+              link.href = originalHref;
+              link.download = originalDownload || "";
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            } else if (originalTarget === "_blank") {
+              window.open(originalHref, "_blank");
+            } else {
+              window.location.href = originalHref;
+            }
+          }
+
+          // We don't reset the animation here immediately because we're
+          // navigating away or downloading. The animation reset is just for visual feedback
+          // when we're still on the same page.
+          setTimeout(() => {
+            if (textElement) textElement.style.transform = "translateY(0)";
+            if (textElement) textElement.style.opacity = "1";
+            if (iconElement) iconElement.style.transform = "translateY(100%)";
+            if (iconElement) iconElement.style.opacity = "0";
+          }, 500);
+        }, 300); // Perform the action after a short delay
       });
     });
   }
-  
-  setupButtonAction('.download-btn');
-  
-  setupButtonAction('.book-btn');
 
-  setupButtonAction('.submit-btn', function(button) {
-    const form = button.closest('form');
+  setupButtonAction(".download-btn");
+  setupButtonAction(".book-btn");
+  setupButtonAction(".submit-btn", function (button) {
+    const form = button.closest("form");
     if (form) {
-      const submitEvent = new Event('submit', {
+      const submitEvent = new Event("submit", {
         bubbles: true,
-        cancelable: true
+        cancelable: true,
       });
       form.dispatchEvent(submitEvent);
     }
   });
 
   initializeAnimations();
-
   initializeFormValidation();
-
   // setTimeout(initializeTurnstile, 1000);
 });
