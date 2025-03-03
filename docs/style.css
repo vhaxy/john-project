@@ -1773,14 +1773,28 @@ textarea {
 }
 
 #thankYouMessage {
-  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  display: none;
+  height: 100%;
+  transition: opacity 0.3s ease-out;
+  background-color: #1e293b;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+#thankYouMessage.visible {
+  opacity: 1;
+  display: block;
 }
 
 .success-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
 }
 
@@ -1791,21 +1805,90 @@ textarea {
   text-align: center;
 }
 
-.next-steps li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-left: 0;
+.thank-you-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.thank-you-header h2 {
+  color: white;
   margin-bottom: 1rem;
 }
 
-.next-steps li::before {
-  content: none;
+.thank-you-header p {
+  color: #e2e8f0;
+}
+
+.next-steps {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.next-steps h3 {
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.next-steps ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.next-steps li {
+  padding: 0.8rem 0;
+  color: white;
+  text-align: center;
+  margin-bottom: 0.8rem;
 }
 
 .next-steps-progress {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.next-steps-progress .progress-bar {
+  height: 6px;
+  background-color: #3f4c6b;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.next-steps-progress .progress-fill {
+  height: 100%;
   width: 100%;
-  max-width: 300px;
-  margin: 0 auto;
+  background-color: white;
+  border-radius: 3px;
+}
+
+.next-steps-progress .progress-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+  #thankYouMessage {
+    padding: 1.5rem;
+  }
+
+  .thank-you-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .next-steps h3 {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .next-steps li {
+    margin-bottom: 0.5rem;
+  }
 }
