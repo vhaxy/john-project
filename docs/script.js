@@ -238,6 +238,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const submitBtn = contactForm.querySelector('.submit-btn');
+      if (submitBtn) {
+        const textElement = submitBtn.querySelector('.submit-text');
+        const iconElement = submitBtn.querySelector('.submit-icon');
+        
+        if (textElement) textElement.style.transform = 'translateY(-100%)';
+        if (textElement) textElement.style.opacity = '0';
+        if (iconElement) iconElement.style.transform = 'translateY(0)';
+        if (iconElement) iconElement.style.opacity = '1';
+        
+        setTimeout(async () => {
+          const success = await handleFormSubmit(e.target);
+          if (!success) {
+            setTimeout(() => {
+              if (textElement) textElement.style.transform = 'translateY(0)';
+              if (textElement) textElement.style.opacity = '1';
+              if (iconElement) iconElement.style.transform = 'translateY(100%)';
+              if (iconElement) iconElement.style.opacity = '0';
+            }, 500);
+          }
+        }, 300);
+      } else {
+        await handleFormSubmit(e.target);
+      }
       await handleFormSubmit(e.target);
     });
 
@@ -288,6 +312,14 @@ document.addEventListener("DOMContentLoaded", function () {
               window.location.href = button.href;
             }
           }
+          
+          setTimeout(() => {
+            if (textElement) textElement.style.transform = 'translateY(0)';
+            if (textElement) textElement.style.opacity = '1';
+            if (iconElement) iconElement.style.transform = 'translateY(100%)';
+            if (iconElement) iconElement.style.opacity = '0';
+          }, 500); 
+          
         }, 300); 
       });
     });

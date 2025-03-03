@@ -1885,13 +1885,6 @@ textarea {
   }
 }
 
-.hero-buttons .download-btn,
-.button-group-2 a.book-btn,
-.submit-btn {
-  cursor: pointer;
-  overflow: hidden;
-}
-
 .hero-buttons .button-text,
 .hero-buttons .button-icon,
 .button-text,
@@ -1901,12 +1894,21 @@ textarea {
   position: absolute;
   width: 100%;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.hero-buttons .download-btn,
-.button-group-2 a.book-btn {
-  position: relative;
+.hero-buttons .button-text,
+.button-text,
+.submit-text {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.hero-buttons .button-icon,
+.button-icon,
+.submit-icon {
+  transform: translateY(100%);
+  opacity: 0;
 }
 
 .hero-buttons .download-btn:active .button-text,
@@ -1914,7 +1916,6 @@ textarea {
 .submit-btn:active .submit-text {
   transform: translateY(-100%);
   opacity: 0;
-  transition: all 0.15s ease;
 }
 
 .hero-buttons .download-btn:active .button-icon,
@@ -1922,13 +1923,12 @@ textarea {
 .submit-btn:active .submit-icon {
   transform: translateY(0);
   opacity: 1;
-  transition: all 0.15s ease;
 }
 
 @media (max-width: 768px) {
   .download-btn,
   .book-btn,
   .submit-btn {
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent; 
   }
 }
