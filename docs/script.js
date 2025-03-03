@@ -283,38 +283,43 @@ document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll(buttonSelector);
     
     buttons.forEach(button => {
-      if (button.tagName === 'A') {
-        button.addEventListener('click', function() {
-          const textElement = button.querySelector('.button-text');
-          const iconElement = button.querySelector('.button-icon');
-          
-          if (textElement) textElement.style.transform = 'translateY(-100%)';
-          if (textElement) textElement.style.opacity = '0';
-          if (iconElement) iconElement.style.transform = 'translateY(0)';
-          if (iconElement) iconElement.style.opacity = '1';
-        });
-      } else {
-        button.addEventListener('click', function(e) {
-          const textElement = button.querySelector('.button-text') || button.querySelector('.submit-text');
-          const iconElement = button.querySelector('.button-icon') || button.querySelector('.submit-icon');
-          
-          if (textElement) textElement.style.transform = 'translateY(-100%)';
-          if (textElement) textElement.style.opacity = '0';
-          if (iconElement) iconElement.style.transform = 'translateY(0)';
-          if (iconElement) iconElement.style.opacity = '1';
-          
-          if (actionFunction) {
-            actionFunction(button);
+      const originalHref = button.tagName === 'A' ? button.href : null;
+      const originalDownload = button.tagName === 'A' ? button.getAttribute('download') : null;
+      const originalTarget = button.tagName === 'A' ? button.target : null;
+      
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const textElement = button.querySelector('.button-text') || button.querySelector('.submit-text');
+        const iconElement = button.querySelector('.button-icon') || button.querySelector('.submit-icon');
+        
+        if (textElement) textElement.style.transform = 'translateY(-100%)';
+        if (textElement) textElement.style.opacity = '0';
+        if (iconElement) iconElement.style.transform = 'translateY(0)';
+        if (iconElement) iconElement.style.opacity = '1';
+        
+        if (actionFunction) {
+          actionFunction(button);
+        } else if (button.tagName === 'A' && originalHref) {
+          if (originalDownload) {
+            const link = document.createElement('a');
+            link.href = originalHref;
+            link.download = originalDownload || '';
+            link.click();
+          } else if (originalTarget === '_blank') {
+            window.open(originalHref, '_blank');
+          } else {
+            window.location.href = originalHref;
           }
-          
-          setTimeout(() => {
-            if (textElement) textElement.style.transform = 'translateY(0)';
-            if (textElement) textElement.style.opacity = '1';
-            if (iconElement) iconElement.style.transform = 'translateY(100%)';
-            if (iconElement) iconElement.style.opacity = '0';
-          }, 500);
-        });
-      }
+        }
+        
+        setTimeout(() => {
+          if (textElement) textElement.style.transform = 'translateY(0)';
+          if (textElement) textElement.style.opacity = '1';
+          if (iconElement) iconElement.style.transform = 'translateY(100%)';
+          if (iconElement) iconElement.style.opacity = '0';
+        }, 800);
+      });
     });
   }
   
