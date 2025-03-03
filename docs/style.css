@@ -1704,7 +1704,6 @@ textarea {
   content: none !important;
 }
 
-/* Center text in thank you message */
 .thank-you-header, 
 .next-steps h3,
 .next-steps ul,
@@ -1721,12 +1720,10 @@ textarea {
   margin-bottom: 1rem;
 }
 
-/* Remove the bullet points */
 .next-steps li::before {
   content: none;
 }
 
-/* Fix button animation issue */
 .hero-buttons .download-btn,
 .button-group-2 a.book-btn,
 .submit-btn {
@@ -1734,7 +1731,6 @@ textarea {
   overflow: hidden;
 }
 
-/* Make the button text and icon both positioned absolutely */
 .hero-buttons .button-text,
 .hero-buttons .button-icon,
 .button-text,

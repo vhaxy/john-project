@@ -16,6 +16,20 @@ function loadTurnstile() {
   document.head.appendChild(script);
 }
 
+function initializeTurnstile() {
+  try {
+    turnstile.render('#turnstile-container', {
+      sitekey: '0x4AAAAAAA9U149qrooH7PkU',
+      callback: function(token) {
+        document.getElementById('turnstileToken').value = token;
+      }
+    });
+    console.log("Turnstile initialized");
+  } catch (error) {
+    console.error("Turnstile initialization error:", error);
+  }
+}
+
 function handleSmoothScroll(targetId) {
   const targetElement = document.querySelector(targetId);
   if (!targetElement) return;
@@ -276,9 +290,10 @@ document.addEventListener("DOMContentLoaded", function () {
       form.submit();
     }
   });
-  
+
   initializeAnimations();
 
   initializeFormValidation();
 
+  setTimeout(initializeTurnstile, 1000);
 });
