@@ -262,7 +262,6 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         await handleFormSubmit(e.target);
       }
-      await handleFormSubmit(e.target);
     });
 
     const phoneInput = contactForm.querySelector('input[name="phone"]');

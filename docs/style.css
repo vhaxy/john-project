@@ -1828,14 +1828,15 @@ textarea {
 
 .next-steps h3 {
   color: white;
-  margin-top: 2rem;
+  margin-top: 1.25rem;
   margin-bottom: 2.5rem;
   text-align: center;
 }
 
 .next-steps p {
   color: white;
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 1rem;
   text-align: center;
 }
 
