@@ -1771,3 +1771,41 @@ textarea {
     -webkit-tap-highlight-color: transparent; 
   }
 }
+
+#thankYouMessage {
+  text-align: center;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.thank-you-header, 
+.next-steps h3,
+.next-steps ul,
+.next-steps li {
+  text-align: center;
+}
+
+.next-steps li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+.next-steps li::before {
+  content: none;
+}
+
+.next-steps-progress {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}

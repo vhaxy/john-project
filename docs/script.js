@@ -132,6 +132,19 @@ function showThankYouMessage() {
   setTimeout(() => {
     formElement.style.display = "none";
     thankYouElement.style.display = "block";
+    thankYouElement.style.textAlign = "center"; 
+    
+    const elements = thankYouElement.querySelectorAll('h2, h3, p, li');
+    elements.forEach(el => {
+      el.style.textAlign = "center";
+    });
+    
+    const listItems = thankYouElement.querySelectorAll('li');
+    listItems.forEach(item => {
+      item.style.listStyle = "none";
+      item.style.paddingLeft = "0";
+    });
+    
     void thankYouElement.offsetWidth;
     thankYouElement.classList.add("visible");
   }, 300);
