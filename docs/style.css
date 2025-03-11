@@ -2915,3 +2915,82 @@ svg[style] {
     opacity: 1;
   }
 }
+
+@media (max-width: 768px) {
+  .hero-buttons .download-btn {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 55px !important;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .hero-buttons .button-text {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .hero-buttons .download-btn,
+  .button-group-2 a.book-btn,
+  .submit-btn {
+    height: 55px !important;
+    padding: 0 20px;
+    width: 100%;
+  }
+  
+  .button-wrapper,
+  .submit-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-buttons .button-text,
+  .button-text,
+  .submit-text {
+    position: static;
+    transform: none !important;
+    opacity: 1 !important;
+    width: auto;
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-buttons .download-btn,
+  .button-group-2 a.book-btn,
+  .submit-btn {
+    height: 50px !important;
+    padding: 0 15px;
+  }
+  
+  .hero-buttons .button-text,
+  .button-text,
+  .submit-text {
+    font-size: 0.85rem;
+  }
+  
+  .hero-buttons .download-btn {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  
+  .hero-buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 15px;
+  }
+}
