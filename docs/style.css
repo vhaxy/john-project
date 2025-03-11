@@ -2823,3 +2823,95 @@ svg[style] {
     top: 1rem;
   }
 }
+
+@media (max-width: 1024px) {
+  .hero-buttons .download-btn:hover .button-text,
+  .button-group-2 a:hover .button-text,
+  .submit-btn:hover .submit-text {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+  }
+
+  .hero-buttons .download-btn:hover .button-icon,
+  .button-group-2 a:hover .button-icon,
+  .submit-btn:hover .submit-icon {
+    transform: translateY(100%) !important;
+    opacity: 0 !important;
+  }
+  
+  .hero-buttons .download-btn:active .button-text,
+  .button-group-2 a.book-btn:active .button-text,
+  .submit-btn:active .submit-text {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+  }
+
+  .hero-buttons .download-btn:active .button-icon,
+  .button-group-2 a.book-btn:active .button-icon,
+  .submit-btn:active .submit-icon {
+    transform: translateY(100%) !important;
+    opacity: 0 !important;
+  }
+  
+  .hero-buttons .download-btn:active,
+  .button-group-2 a.book-btn:active,
+  .submit-btn:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+  }
+
+  .download-btn,
+  .book-btn,
+  .submit-btn {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+  }
+  
+  .button-icon,
+  .submit-icon {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero-buttons .button-text,
+  .hero-buttons .button-icon,
+  .button-text,
+  .button-icon,
+  .submit-text,
+  .submit-icon {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .hero-buttons .button-text,
+  .button-text,
+  .submit-text {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .hero-buttons .button-icon,
+  .button-icon,
+  .submit-icon {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  .hero-buttons .download-btn:hover .button-text,
+  .button-group-2 a:hover .button-text,
+  .submit-btn:hover .submit-text {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  .hero-buttons .download-btn:hover .button-icon,
+  .button-group-2 a:hover .button-icon,
+  .submit-btn:hover .submit-icon {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
