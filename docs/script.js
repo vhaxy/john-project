@@ -16,20 +16,6 @@ function loadTurnstile() {
   document.head.appendChild(script);
 }
 
-// function initializeTurnstile() {
-//   try {
-//     turnstile.render('#turnstile-container', {
-//       sitekey: '0x4AAAAAAA9U149qrooH7PkU',
-//       callback: function(token) {
-//         document.getElementById('turnstileToken').value = token;
-//       }
-//     });
-//     console.log("Turnstile initialized");
-//   } catch (error) {
-//     console.error("Turnstile initialization error:", error);
-//   }
-// }
-
 function handleSmoothScroll(targetId) {
   const targetElement = document.querySelector(targetId);
   if (!targetElement) return;
@@ -229,6 +215,80 @@ function initializeFormValidation() {
   });
 }
 
+function isMobileOrTablet() {
+  return window.innerWidth <= 1024;
+}
+
+function handleButtonClick(e, button, actionFunction) {
+  e.preventDefault();
+
+  const textElement =
+    button.querySelector(".button-text") ||
+    button.querySelector(".submit-text");
+  const iconElement =
+    button.querySelector(".button-icon") ||
+    button.querySelector(".submit-icon");
+
+  if (isMobileOrTablet()) {
+    if (actionFunction) {
+      actionFunction(button);
+    } else if (button.tagName === "A") {
+      const originalHref = button.getAttribute("href");
+      const originalDownload = button.getAttribute("download");
+      const originalTarget = button.getAttribute("target");
+
+      if (originalDownload) {
+        const link = document.createElement("a");
+        link.href = originalHref;
+        link.download = originalDownload || "";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else if (originalTarget === "_blank") {
+        window.open(originalHref, "_blank");
+      } else {
+        window.location.href = originalHref;
+      }
+    }
+    return;
+  }
+
+  if (textElement) textElement.style.transform = "translateY(-100%)";
+  if (textElement) textElement.style.opacity = "0";
+  if (iconElement) iconElement.style.transform = "translateY(0)";
+  if (iconElement) iconElement.style.opacity = "1";
+
+  setTimeout(() => {
+    if (actionFunction) {
+      actionFunction(button);
+    } else if (button.tagName === "A") {
+      const originalHref = button.getAttribute("href");
+      const originalDownload = button.getAttribute("download");
+      const originalTarget = button.getAttribute("target");
+
+      if (originalDownload) {
+        const link = document.createElement("a");
+        link.href = originalHref;
+        link.download = originalDownload || "";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else if (originalTarget === "_blank") {
+        window.open(originalHref, "_blank");
+      } else {
+        window.location.href = originalHref;
+      }
+    }
+
+    setTimeout(() => {
+      if (textElement) textElement.style.transform = "translateY(0)";
+      if (textElement) textElement.style.opacity = "1";
+      if (iconElement) iconElement.style.transform = "translateY(100%)";
+      if (iconElement) iconElement.style.opacity = "0";
+    }, 500);
+  }, 300);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   loadTurnstile();
 
@@ -239,9 +299,15 @@ document.addEventListener("DOMContentLoaded", function () {
     contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const submitBtn = contactForm.querySelector(".submit-btn");
+
       if (submitBtn) {
         const textElement = submitBtn.querySelector(".submit-text");
         const iconElement = submitBtn.querySelector(".submit-icon");
+
+        if (isMobileOrTablet()) {
+          const success = await handleFormSubmit(e.target);
+          return;
+        }
 
         if (textElement) textElement.style.transform = "translateY(-100%)";
         if (textElement) textElement.style.opacity = "0";
@@ -283,59 +349,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll(buttonSelector);
 
     buttons.forEach((button) => {
-      const originalHref =
-        button.tagName === "A" ? button.getAttribute("href") : null;
-      const originalDownload =
-        button.tagName === "A" ? button.getAttribute("download") : null;
-      const originalTarget =
-        button.tagName === "A" ? button.getAttribute("target") : null;
-
       button.addEventListener("click", function (e) {
-        e.preventDefault();
-
-        const textElement =
-          button.querySelector(".button-text") ||
-          button.querySelector(".submit-text");
-        const iconElement =
-          button.querySelector(".button-icon") ||
-          button.querySelector(".submit-icon");
-
-        // Show animation
-        if (textElement) textElement.style.transform = "translateY(-100%)";
-        if (textElement) textElement.style.opacity = "0";
-        if (iconElement) iconElement.style.transform = "translateY(0)";
-        if (iconElement) iconElement.style.opacity = "1";
-
-        // Set a short timeout to allow the animation to start before performing the action
-        setTimeout(() => {
-          if (actionFunction) {
-            actionFunction(button);
-          } else if (button.tagName === "A" && originalHref) {
-            if (originalDownload) {
-              // Create and trigger a download link programmatically
-              const link = document.createElement("a");
-              link.href = originalHref;
-              link.download = originalDownload || "";
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-            } else if (originalTarget === "_blank") {
-              window.open(originalHref, "_blank");
-            } else {
-              window.location.href = originalHref;
-            }
-          }
-
-          // We don't reset the animation here immediately because we're
-          // navigating away or downloading. The animation reset is just for visual feedback
-          // when we're still on the same page.
-          setTimeout(() => {
-            if (textElement) textElement.style.transform = "translateY(0)";
-            if (textElement) textElement.style.opacity = "1";
-            if (iconElement) iconElement.style.transform = "translateY(100%)";
-            if (iconElement) iconElement.style.opacity = "0";
-          }, 500);
-        }, 300); // Perform the action after a short delay
+        handleButtonClick(e, button, actionFunction);
       });
     });
   }
@@ -353,7 +368,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  window.addEventListener("resize", function () {
+    document
+      .querySelectorAll(
+        ".button-text, .button-icon, .submit-text, .submit-icon"
+      )
+      .forEach((el) => {
+        if (
+          el.classList.contains("button-text") ||
+          el.classList.contains("submit-text")
+        ) {
+          el.style.transform = "translateY(0)";
+          el.style.opacity = "1";
+        } else {
+          el.style.transform = "translateY(100%)";
+          el.style.opacity = "0";
+        }
+      });
+  });
+
   initializeAnimations();
   initializeFormValidation();
-  // setTimeout(initializeTurnstile, 1000);
 });
